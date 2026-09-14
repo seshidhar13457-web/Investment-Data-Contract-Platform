@@ -1,0 +1,53 @@
+name: Data Contract Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  contract-regression-tests:
+
+    name: Contract Regression Tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-ci.txt
+
+      - name: Run Data Contract tests
+        run: |
+          python -m pytest tests/test_data_contract.py -v
+
+      - name: Quality gate passed
+        if: success()
+        run: |
+          echo "DATA CONTRACT QUALITY GATE PASSED"
+
+      - name: Quality gate failed
+        if: failure()
+        run: |
+          echo "DATA CONTRACT QUALITY GATE FAILED"
+          exit 1
