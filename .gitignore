@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+
+# Pytest
+.pytest_cache/
+
+# DuckDB generated database
+data/*.duckdb
+data/*.duckdb.wal
+
+# Generated validated output
+data/trades_validated.csv
+
+# Quarantine output
+quarantine/*.csv
+
+# Generated reports
+reports/*.csv
+
+# IDE
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+*.env

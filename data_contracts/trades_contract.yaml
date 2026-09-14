@@ -1,0 +1,119 @@
+contract:
+  name: trades_data_contract
+  version: "1.0"
+  owner: investment_data_engineering
+  description: >
+    Defines the expected schema and quality rules
+    for the investment trades dataset.
+
+dataset:
+  name: trades
+  source: data/trades.csv
+
+schema:
+
+  trade_id:
+    type: integer
+    required: true
+    unique: true
+
+  portfolio_id:
+    type: string
+    required: true
+
+  investor_id:
+    type: string
+    required: true
+
+  investor_name:
+    type: string
+    required: true
+
+  symbol:
+    type: string
+    required: true
+
+  exchange:
+    type: string
+    required: true
+    allowed_values:
+      - NYSE
+      - NASDAQ
+
+  transaction_type:
+    type: string
+    required: true
+    allowed_values:
+      - BUY
+      - SELL
+
+  order_type:
+    type: string
+    required: true
+    allowed_values:
+      - MARKET
+      - LIMIT
+
+  trade_status:
+    type: string
+    required: true
+    allowed_values:
+      - COMPLETED
+      - EXECUTED
+      - PENDING
+      - CANCELLED
+
+  quantity:
+    type: integer
+    required: true
+    min: 1
+
+  price:
+    type: float
+    required: true
+    min: 0.01
+
+  trade_value:
+    type: float
+    required: true
+    min: 0.01
+
+  trade_timestamp:
+    type: timestamp
+    required: true
+
+quality:
+
+  duplicate_trade_id:
+    rule: trade_id_must_be_unique
+    severity: critical
+
+  positive_quantity:
+    rule: quantity_greater_than_zero
+    severity: critical
+
+  positive_price:
+    rule: price_greater_than_zero
+    severity: critical
+
+  positive_trade_value:
+    rule: trade_value_greater_than_zero
+    severity: critical
+
+  valid_transaction_type:
+    rule: transaction_type_must_be_buy_or_sell
+    severity: critical
+
+  valid_trade_status:
+    rule: trade_status_must_be_valid
+    severity: warning
+
+freshness:
+  column: trade_timestamp
+  maximum_delay_minutes: 1440
+
+schema_evolution:
+  allow_new_optional_columns: true
+  allow_column_removal: false
+  allow_type_changes: false
+  require_contract_version_change_for_breaking_changes: true

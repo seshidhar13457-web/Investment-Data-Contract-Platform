@@ -1,0 +1,5 @@
+type: duckdb
+name: investment_duckdb
+
+connection:
+  database: data/investment.duckdb

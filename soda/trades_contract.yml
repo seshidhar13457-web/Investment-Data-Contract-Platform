@@ -1,0 +1,87 @@
+dataset: investment_duckdb/main/trades
+
+checks:
+  - row_count:
+
+  - schema:
+      allow_extra_columns: true
+      allow_other_column_order: true
+
+columns:
+
+  - name: trade_id
+    checks:
+      - missing:
+      - duplicate:
+
+  - name: portfolio_id
+    checks:
+      - missing:
+
+  - name: investor_id
+    checks:
+      - missing:
+
+  - name: investor_name
+    checks:
+      - missing:
+
+  - name: symbol
+    checks:
+      - missing:
+
+  - name: exchange
+    checks:
+      - missing:
+      - invalid:
+          valid_values:
+            - NYSE
+            - NASDAQ
+
+  - name: transaction_type
+    checks:
+      - missing:
+      - invalid:
+          valid_values:
+            - BUY
+            - SELL
+
+  - name: order_type
+    checks:
+      - missing:
+      - invalid:
+          valid_values:
+            - MARKET
+            - LIMIT
+
+  - name: trade_status
+    checks:
+      - missing:
+      - invalid:
+          valid_values:
+            - COMPLETED
+            - EXECUTED
+            - PENDING
+            - CANCELLED
+
+  - name: quantity
+    checks:
+      - missing:
+      - invalid:
+          valid_min: 1
+
+  - name: price
+    checks:
+      - missing:
+      - invalid:
+          valid_min: 0.01
+
+  - name: trade_value
+    checks:
+      - missing:
+      - invalid:
+          valid_min: 0.01
+
+  - name: trade_timestamp
+    checks:
+      - missing:
