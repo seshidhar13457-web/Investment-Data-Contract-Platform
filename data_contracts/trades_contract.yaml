@@ -60,6 +60,7 @@ schema:
     allowed_values:
       - COMPLETED
       - PENDING
+      - EXECUTED
       - CANCELLED
 
   quantity:
