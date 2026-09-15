@@ -59,7 +59,6 @@ schema:
     required: true
     allowed_values:
       - COMPLETED
-      - EXECUTED
       - PENDING
       - CANCELLED
 
