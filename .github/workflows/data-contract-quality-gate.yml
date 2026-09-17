@@ -9,10 +9,12 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
 
 jobs:
+
+  # ============================================================
+  # GATE 1: CUSTOM PYTHON DATA CONTRACT REGRESSION TESTS
+  # ============================================================
 
   contract-regression-tests:
 
@@ -38,10 +40,14 @@ jobs:
         run: |
           pip install -r requirements-ci.txt
 
-      - name: Run Data Contract regression tests
+      - name: Run contract regression tests
         run: |
           python -m pytest tests/test_data_contract.py -v
 
+
+  # ============================================================
+  # GATE 2: SODA DATA QUALITY VALIDATION
+  # ============================================================
 
   soda-data-quality-gate:
 
@@ -67,7 +73,7 @@ jobs:
         run: |
           pip install -r requirements-ci.txt
 
-      - name: Load trade data into DuckDB
+      - name: Load trades into DuckDB
         run: |
           python etl/load_trades_duckdb.py
 
@@ -77,4 +83,39 @@ jobs:
 
       - name: Run Soda contract verification
         run: |
-          soda contract verify --data-source soda/ds_config.yml --contract soda/trades_contract.yml
+          soda contract verify \
+            --data-source soda/ds_config.yml \
+            --contract soda/trades_contract.yml
+
+
+  # ============================================================
+  # GATE 3: PRODUCER-CONSUMER CONTRACT IMPACT ANALYSIS
+  # ============================================================
+
+  contract-impact-analysis:
+
+    name: Contract Impact Analysis
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-ci.txt
+
+      - name: Run producer-consumer impact tests
+        run: |
+          python -m pytest tests/test_contract_impact.py -v
