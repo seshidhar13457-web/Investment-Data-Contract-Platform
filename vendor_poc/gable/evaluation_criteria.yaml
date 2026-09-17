@@ -1,0 +1,50 @@
+vendor_evaluation:
+
+  use_case:
+    name: enterprise_data_contract_management
+
+  criteria:
+
+    contract_definition:
+      required: true
+      description: Define schema and business expectations as a formal contract.
+
+    producer_ownership:
+      required: true
+      description: Identify the team responsible for producing the dataset.
+
+    consumer_discovery:
+      required: true
+      description: Identify downstream consumers dependent on the dataset.
+
+    breaking_change_detection:
+      required: true
+      description: Detect changes that could break downstream consumers.
+
+    schema_evolution:
+      required: true
+      description: Distinguish breaking and non-breaking schema changes.
+
+    impact_analysis:
+      required: true
+      description: Determine which consumers are affected by a proposed change.
+
+    cicd_integration:
+      required: true
+      description: Validate contract changes during pull requests.
+
+    data_quality:
+      required: true
+      description: Support or integrate with data quality validation.
+
+    observability:
+      required: true
+      description: Provide visibility into contract and dataset health.
+
+    versioning:
+      required: true
+      description: Maintain controlled versions of contracts.
+
+    auditability:
+      required: true
+      description: Maintain evidence of contract changes and validation results.
