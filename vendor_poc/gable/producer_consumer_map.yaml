@@ -1,0 +1,49 @@
+dataset:
+  name: trades
+  domain: investment
+  owner: investment_data_engineering
+
+producer:
+  name: trade_processing_pipeline
+  team: investment_data_engineering
+
+consumers:
+
+  - name: portfolio_analytics
+    type: analytics
+    required_fields:
+      - trade_id
+      - portfolio_id
+      - symbol
+      - quantity
+      - price
+      - trade_value
+
+  - name: risk_analytics
+    type: risk
+    required_fields:
+      - trade_id
+      - investor_id
+      - symbol
+      - quantity
+      - price
+      - trade_value
+
+  - name: compliance_reporting
+    type: regulatory_reporting
+    required_fields:
+      - trade_id
+      - investor_id
+      - transaction_type
+      - trade_status
+      - trade_timestamp
+
+  - name: trade_dashboard
+    type: business_intelligence
+    required_fields:
+      - symbol
+      - exchange
+      - transaction_type
+      - quantity
+      - price
+      - trade_value
