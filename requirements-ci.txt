@@ -2,3 +2,4 @@ duckdb==1.5.5
 PyYAML==6.0.3
 pytest
 soda-duckdb
+great_expectations==1.23.0
