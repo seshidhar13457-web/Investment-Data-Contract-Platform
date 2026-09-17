@@ -23,6 +23,7 @@ consumers:
     type: risk
     required_fields:
       - trade_id
+      - investor_id
       - symbol
       - quantity
       - price
@@ -32,6 +33,7 @@ consumers:
     type: regulatory_reporting
     required_fields:
       - trade_id
+      - investor_id
       - transaction_type
       - trade_status
       - trade_timestamp
