@@ -1,0 +1,77 @@
+evaluation:
+  project: Investment Data Contract Platform
+  use_case: Enterprise Data Contract, Data Quality and Observability
+
+  requirements:
+
+    - capability: data_contract_management
+      description: Manage formal producer-consumer data contracts
+      priority: critical
+
+    - capability: schema_change_detection
+      description: Detect potentially breaking schema changes
+      priority: critical
+
+    - capability: producer_consumer_governance
+      description: Manage producer and downstream consumer relationships
+      priority: critical
+
+    - capability: impact_analysis
+      description: Identify downstream consumers affected by a change
+      priority: critical
+
+    - capability: data_quality_validation
+      description: Validate data against quality expectations
+      priority: critical
+
+    - capability: observability
+      description: Monitor dataset health and operational quality
+      priority: high
+
+    - capability: cicd_integration
+      description: Integrate validation into pull requests and deployment pipelines
+      priority: critical
+
+    - capability: schema_evolution
+      description: Control breaking and non-breaking schema changes
+      priority: high
+
+    - capability: version_control
+      description: Maintain auditable contract changes
+      priority: high
+
+    - capability: scalability
+      description: Support enterprise-scale data platforms
+      priority: high
+
+  vendors:
+
+    gable:
+      evaluation_focus:
+        - data_contract_management
+        - producer_consumer_governance
+        - schema_change_detection
+        - impact_analysis
+        - schema_evolution
+        - cicd_integration
+
+    soda:
+      evaluation_focus:
+        - data_quality_validation
+        - data_contract_validation
+        - cicd_integration
+        - dataset_monitoring
+
+    great_expectations:
+      evaluation_focus:
+        - data_quality_validation
+        - expectation_based_testing
+        - pipeline_validation
+        - automated_testing
+
+    monte_carlo:
+      evaluation_focus:
+        - observability
+        - incident_detection
+        - lineage
+        - data_reliability_monitoring
